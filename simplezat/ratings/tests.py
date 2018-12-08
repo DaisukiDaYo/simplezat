@@ -66,7 +66,7 @@ class CommentViewTest(TestCase):
         response = self.client.post(url)
 
         redirect_url = reverse('thanks')
-        self.assertRedirects(response, redirect_url)
+        self.assertRedirects(response, redirect_url, status_code=302)
 
 
 class ThanksViewTest(TestCase):
