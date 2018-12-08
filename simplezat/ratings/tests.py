@@ -26,3 +26,29 @@ class RatingViewTest(TestCase):
         expected = '<a href="negative/">' \
             '<img src="/static/images/negative.svg" alt="Negative"></a>'
         self.assertContains(response, expected, status_code=200)
+
+
+class CommentViewTest(TestCase):
+    def test_comment_view_should_render_text_and_comment_form_correctly(self):
+        for each in ['positive', 'neutral', 'negative']:
+            url = reverse(
+                'comment',
+                kwargs={
+                    'rating': each
+                }
+            )
+            response = self.client.get(url)
+
+            expected = '<h1>Any comment?</h1>'
+            self.assertContains(response, expected, status_code=200)
+
+            expected = '<form action="." method="post">'
+            self.assertContains(response, expected, status_code=200)
+
+            expected = '<input type="hidden" name="csrfmiddlewaretoken"'
+            self.assertContains(response, expected, status_code=200)
+
+            expected = '<textarea name="comment"></textarea>' \
+                f'<input type="hidden" name="rating" value="{each}">' \
+                '<button type="submit">Submit</button></form>'
+            self.assertContains(response, expected, status_code=200)

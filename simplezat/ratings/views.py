@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -12,3 +11,13 @@ class RatingView(TemplateView):
             self.template_name
         )
 
+
+class CommentView(TemplateView):
+    template_name = 'comments.html'
+
+    def get(self, request, rating):
+        return render(
+            request,
+            self.template_name,
+            {'rating': rating}
+        )
