@@ -11,3 +11,18 @@ class RatingViewTest(TestCase):
 
         expected = '<h1>How do we do?</h1>'
         self.assertContains(response, expected, status_code=200)
+
+    def test_rating_view_should_show_three_rating_image(self):
+        response = self.client.get(self.url)
+
+        expected = '<a href="/ratings/positive/">' \
+            '<img src="/static/images/positive.svg" alt="Positive"></a>'
+        self.assertContains(response, expected, status_code=200)
+
+        expected = '<a href="/ratings/neutral/">' \
+            '<img src="/static/images/neutral.svg" alt="Neutral"></a>'
+        self.assertContains(response, expected, status_code=200)
+
+        expected = '<a href="/ratings/negative/">' \
+            '<img src="/static/images/negative.svg" alt="Negative"></a>'
+        self.assertContains(response, expected, status_code=200)
