@@ -26,7 +26,6 @@ class CommentView(TemplateView):
         return redirect('thanks')
 
 
-
 class ThanksView(TemplateView):
     template_name = 'thanks.html'
 
