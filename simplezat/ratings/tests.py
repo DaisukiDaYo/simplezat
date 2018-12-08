@@ -15,15 +15,18 @@ class RatingViewTest(TestCase):
     def test_rating_view_should_show_three_rating_image(self):
         response = self.client.get(self.url)
 
-        expected = '<a href="positive/">' \
+        positive_url = reverse('comment', kwargs={'rating': 'positive'})
+        expected = f'<a href="{positive_url}">' \
             '<img src="/static/images/positive.svg" alt="Positive"></a>'
         self.assertContains(response, expected, status_code=200)
 
-        expected = '<a href="neutral/">' \
+        neutral_url = reverse('comment', kwargs={'rating': 'neutral'})
+        expected = f'<a href="{neutral_url}">' \
             '<img src="/static/images/neutral.svg" alt="Neutral"></a>'
         self.assertContains(response, expected, status_code=200)
 
-        expected = '<a href="negative/">' \
+        negative_url = reverse('comment', kwargs={'rating': 'negative'})
+        expected = f'<a href="{negative_url}">' \
             '<img src="/static/images/negative.svg" alt="Negative"></a>'
         self.assertContains(response, expected, status_code=200)
 

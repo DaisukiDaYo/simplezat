@@ -3,6 +3,6 @@
 
 <h1>How do we do?</h1>
 
-<a href="positive/"><img src="{% static "images/positive.svg" %}" alt="Positive"></a>
-<a href="neutral/"><img src="{% static "images/neutral.svg" %}" alt="Neutral"></a>
-<a href="negative/"><img src="{% static "images/negative.svg" %}" alt="Negative"></a>
+<a href="{% url 'comment' 'positive' %}"><img src="{% static "images/positive.svg" %}" alt="Positive"></a>
+<a href="{% url 'comment' 'neutral' %}"><img src="{% static "images/neutral.svg" %}" alt="Neutral"></a>
+<a href="{% url 'comment' 'negative' %}"><img src="{% static "images/negative.svg" %}" alt="Negative"></a>
