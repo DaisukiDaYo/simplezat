@@ -85,7 +85,7 @@ jobs:
       - run:
           name: Build Live Images
           command: |
-            docker build -t underr/simplezat:live -f Dockerfile.prod .
+            docker build -t underr/simplezat:live -f Dockerfile.production .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push underr/simplezat:live
       - add_ssh_keys:
