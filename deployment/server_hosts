@@ -1,0 +1,5 @@
+[dev]
+35.244.119.112 ansible_ssh_user=un ansible_ssh_private_key_file=~/.ssh/simplezat_id_rsa
+
+[prod]
+35.244.109.21 ansible_ssh_user=un ansible_ssh_private_key_file=~/.ssh/simplezat_id_rsa
