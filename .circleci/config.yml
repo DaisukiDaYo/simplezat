@@ -54,9 +54,9 @@ jobs:
     docker:
       - image: circleci/python:3.7.1
     steps:
-      - setup_romote_docker
       - attach_workspace:
           at: .
+      - setup_remote_docker
       - run:
           name: Build Stable Images
           command: |
