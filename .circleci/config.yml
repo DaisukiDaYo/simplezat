@@ -56,12 +56,22 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - setup_romote_docker
+      - run:
+          name: Build Stable Images
+          command: |
+            docker build -t underr/simplezat:stable -f Dockerfile.dev .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push underr/simplezat:stable
+      - add_ssh_keys:
+          fingerprints:
+            - ""
       - run:
           name: Deploy to Development Server 
           command: |
             cd deployment
             pipenv install
-            pipenv run ansible-playbooks -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
+            pipenv run ansible-playbook -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
 
 workflows:
   version: 2
