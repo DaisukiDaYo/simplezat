@@ -65,7 +65,7 @@ jobs:
             docker push underr/simplezat:stable
       - add_ssh_keys:
           fingerprints:
-            - ""
+            - "86:82:d2:ca:66:35:3d:4c:35:fb:9a:71:18:91:0a:d0"
       - run:
           name: Deploy to Development Server 
           command: |
