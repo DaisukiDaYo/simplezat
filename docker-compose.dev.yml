@@ -1,8 +1,16 @@
 version: '3.3'
 
 services:
+  db:
+    image: postgres:11.1-alpine
+    volumes:
+      - postgres-data:/var/liv/postgresql/data
+
   app:
     image: underr/simplezat:stable
     ports:
       - '8000:8000'
     command: ./entrypoint.dev.sh
+
+volumes:
+  postgres-data:
