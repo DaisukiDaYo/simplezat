@@ -62,6 +62,8 @@ jobs:
           name: Build Stable Images
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t underr/simplezat-nginx:stable -f nginx/Dockerfile nginx/
+            docker tag underr/simplezat-nginx:stable underr/simplezat-nginx:$CIRCLE_SHA1
             docker build -t underr/simplezat:stable -f Dockerfile.dev .
             docker tag underr/simplezat:stable underr/simplezat:$CIRCLE_SHA1
             docker push underr/simplezat:stable
@@ -103,6 +105,9 @@ jobs:
           name: Build Live Images
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker pull underr/simplezat-nginx:stable
+            docker tag underr/simplezat-nginx:stable underr/simplezat-nginx:live
+            docker push underr/simplezat-nginx:live
             docker build -t underr/simplezat:live -f Dockerfile.production .
             docker tag underr/simplezat:live underr/simplezat:$CIRCLE_SHA1
             docker push underr/simplezat:live
