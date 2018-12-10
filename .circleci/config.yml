@@ -76,6 +76,20 @@ jobs:
             pipenv install
             pipenv run ansible-playbook -i server_hosts playbooks/dev.yml --extra-vars "project_root=~/simplezat"
 
+  acceptance_tests:
+    working_directory: ~/simplezat
+    docker:
+      - image: circleci/node:chakracore-browsers-legacy
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Acceptance Test
+          command: |
+            cd tests
+            pipenv install
+            pipenv run CYPRESS_baseUrl=http://35.244.119.112:8000 ./node_modules/.bin/cypress run --spec "cypress/integration/simplezat/*"
+
   deploy_production:
     working_directory: ~/simplezat
     docker:
@@ -120,6 +134,9 @@ workflows:
       - deploy_dev:
           requires:
             - unit_tests
+      - acceptance_tests:
+          requires:
+            - deploy_dev
       - wait_for_approval:
           type: approval
           requires:
