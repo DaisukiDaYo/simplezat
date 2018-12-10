@@ -36,9 +36,6 @@ class RatingFormTest(TestCase):
         form = RatingForm(data=data)
         self.assertFalse(form.is_valid())
 
-        expected = {'comment': ['Please enter comment...']}
-        self.assertEqual(form.errors, expected)
-
     def test_form_with_valid(self):
         data = {
             'sentiment': 'positive',

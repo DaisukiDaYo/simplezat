@@ -14,8 +14,3 @@ class RatingForm(ModelForm):
         widgets = {
             'sentiment': forms.HiddenInput()
         }
-        error_messages = {
-            'comment': {
-                'required': 'Please enter comment...',
-            },
-        }
