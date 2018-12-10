@@ -20,14 +20,15 @@ context('Rating', () => {
       cy.get('h1').should('contain', 'Thank you~')
   })
 
-  it('should show error message when give rating without comment', () => {
+  it('should require comment when give rating without comment', () => {
       cy.get('img[alt="Positive"]').click()
       cy.wait(1000)
+
+      cy.get('textarea[name="comment"]').should('have.attr', 'required')
 
       cy.get('button').click()
       cy.wait(1000)
 
       cy.get('body').should('not.contain', 'Thank you~')
-      cy.get('p.error').should('contain', 'Please enter comment...')
   })
 })
