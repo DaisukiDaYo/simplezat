@@ -33,7 +33,20 @@ class CommentView(TemplateView):
         )
 
     def post(self, request, rating):
-        return redirect('thanks')
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('thanks')
+
+        return render(
+            request,
+            self.template_name,
+            {
+                'rating': rating,
+                'form': form
+            }
+        )
 
 
 class ThanksView(TemplateView):
