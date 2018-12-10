@@ -92,7 +92,7 @@ jobs:
           command: |
             cd tests
             npm install
-            CYPRESS_baseUrl=http://35.244.119.112:8000 ./node_modules/.bin/cypress run --spec "cypress/integration/simplezat/*"
+            CYPRESS_baseUrl=http://35.244.119.112 ./node_modules/.bin/cypress run --spec "cypress/integration/simplezat/*"
 
   deploy_production:
     working_directory: ~/simplezat
