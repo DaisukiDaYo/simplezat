@@ -13,4 +13,3 @@ class RatingTest(TestCase):
         rating = Rating.objects.last()
         self.assertEqual(rating.sentiment, 'positive')
         self.assertEqual(rating.comment, 'You did great!')
-
