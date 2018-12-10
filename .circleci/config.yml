@@ -79,7 +79,7 @@ jobs:
   acceptance_tests:
     working_directory: ~/simplezat
     docker:
-      - image: circleci/node:chakracore-browsers-legacy
+      - image: circleci/node:8.14-browsers
     steps:
       - attach_workspace:
           at: .
