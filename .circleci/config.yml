@@ -60,9 +60,11 @@ jobs:
       - run:
           name: Build Stable Images
           command: |
-            docker build -t underr/simplezat:stable -f Dockerfile.dev .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t underr/simplezat:stable -f Dockerfile.dev .
+            docker tag underr/simplezat:stable underr/simplezat:$CIRCLE_SHA1
             docker push underr/simplezat:stable
+            docker push underr/simplezat:$CIRCLE_SHA1
       - add_ssh_keys:
           fingerprints:
             - "86:82:d2:ca:66:35:3d:4c:35:fb:9a:71:18:91:0a:d0"
@@ -85,9 +87,11 @@ jobs:
       - run:
           name: Build Live Images
           command: |
-            docker build -t underr/simplezat:live -f Dockerfile.production .
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t underr/simplezat:live -f Dockerfile.production .
+            docker tag underr/simplezat:live underr/simplezat:$CIRCLE_SHA1
             docker push underr/simplezat:live
+            docker push underr/simplezat:$CIRCLE_SHA1
       - add_ssh_keys:
           fingerprints:
             - "86:82:d2:ca:66:35:3d:4c:35:fb:9a:71:18:91:0a:d0"
