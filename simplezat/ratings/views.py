@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
+from .forms import RatingForm
+
 
 class RatingView(TemplateView):
     template_name = 'ratings.html'
@@ -16,10 +18,18 @@ class CommentView(TemplateView):
     template_name = 'comments.html'
 
     def get(self, request, rating):
+        initial = {
+            'sentiment': rating
+        }
+        form = RatingForm(initial=initial)
+
         return render(
             request,
             self.template_name,
-            {'rating': rating}
+            {
+                'rating': rating,
+                'form': form,
+            }
         )
 
     def post(self, request, rating):
